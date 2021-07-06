@@ -5,6 +5,8 @@
 <li>Daily memo, README write for myself can easily understand if  read again in future.</li>
 </ul>
 <h2 id="daily-memo"><strong>Daily memo</strong></h2>
-<p><a href="https://andy121231.blogspot.com/2021/07/Dailymemo.html">https://andy121231.blogspot.com/2021/07/Dailymemo.html</a></p>
+<ul>
+<li><a href="https://andy121231.blogspot.com/2021/07/Dailymemo.html">https://andy121231.blogspot.com/2021/07/Dailymemo.html</a></li>
+</ul>
 <h2 id="todo"><strong>Todo</strong></h2>
 
