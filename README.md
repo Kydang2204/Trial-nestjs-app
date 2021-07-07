@@ -1,7 +1,3 @@
----
-
-
----
 
 <h2 id="notes-for-meeting"><strong>Notes for meeting</strong></h2>
 <ul>
