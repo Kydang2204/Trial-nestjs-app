@@ -1,3 +1,8 @@
+---
+
+
+---
+
 <h2 id="notes-for-meeting"><strong>Notes for meeting</strong></h2>
 <ul>
 <li>Target for month July 2021  is understanding basic nestjs from introduction to overview/modules</li>
