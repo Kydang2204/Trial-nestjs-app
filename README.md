@@ -14,4 +14,9 @@
 <ul>
 <li>Researching to create Github project management.</li>
 </ul>
+<p><strong>7/7</strong></p>
+<ul>
+<li>Researching nestjs.</li>
+<li>Researching about decorator.</li>
+</ul>
 
