@@ -17,4 +17,9 @@
 - Researching nestjs.
 - Researching about decorator.
 
+**8/7**
+- Researching controller and create a simple controller with 5 functions get all users, get one user, post, put, delete user.
+- Install eslint.
+- Push up github with 01/controller branch.
+
 
