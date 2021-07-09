@@ -18,9 +18,9 @@
 - Researching about decorator.
 
 **8/7**
-- Init nestjs, creating simple controller of user and config eslint. 
+- Initing nestjs, creating simple controller of user and config eslint. 
 
 **9/7**
-- Creat data to object file, service files, edit eslint file.
+- Creating data to object file, service file, edit eslint file.
 
 
