@@ -20,4 +20,7 @@
 **8/7**
 - Init nestjs, creating simple controller of user and config eslint. 
 
+**9/7**
+- Creat data to object file, service files, edit eslint file.
+
 
