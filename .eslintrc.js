@@ -4,7 +4,9 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'airbnb-base',
+    'airbnb-typescript',
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -15,10 +17,11 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
-    'import/no-unresolved':'off',
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "max-classes-per-file": ["error", 4],
     'import/prefer-default-export':'off',
     'class-methods-use-this':'off',
-    'no-undef':'off',
     'brace-style': ['error', '1tbs', {
       allowSingleLine: false,
     }],
