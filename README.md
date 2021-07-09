@@ -17,4 +17,7 @@
 - Researching nestjs.
 - Researching about decorator.
 
+**8/7**
+- Init nestjs, creating simple controller of user and config eslint. 
+
 
