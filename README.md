@@ -21,6 +21,7 @@
 - Initing nestjs, creating simple controller of user and config eslint. 
 
 **9/7**
+- Adding request variable
 - Creating data to object file, service file, edit eslint file.
 
 
