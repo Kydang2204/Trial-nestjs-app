@@ -24,4 +24,7 @@
 - Adding request variable
 - Creating data to object file, service file, edit eslint file.
 
+**11-12-13/7**
+- Adding module file,
+- Researching about nestjs.
 
