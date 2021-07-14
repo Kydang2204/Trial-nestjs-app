@@ -26,5 +26,5 @@
 
 **11-12-13/7**
 - Adding module file,
-- Researching about nestjs.
+- Researching about typescript, nestjs.
 
