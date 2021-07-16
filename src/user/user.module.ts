@@ -4,15 +4,14 @@ import {
 
 import {
   UserController,
-} from '../user/user.controller';
+} from './user.controller';
 
 import {
   UserService,
-} from '../user/user.service';
+} from './user.service';
 
 @Module({
-  imports: [],
   controllers: [UserController],
   providers: [UserService],
 })
-export class AppModule {}
+export class UserModule {}

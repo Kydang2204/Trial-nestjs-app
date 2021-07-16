@@ -4,7 +4,7 @@ import {
 
 import {
   AppModule,
-} from './app/app.module';
+} from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
