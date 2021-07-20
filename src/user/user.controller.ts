@@ -3,8 +3,8 @@ import {
 } from '@nestjs/common';
 
 import {
-  FindUserDto, UserDto, CreatUserDto,
-} from './dto/user.dto';
+  User,
+} from './dtos/user.dto';
 
 import {
   UserService,
@@ -15,29 +15,29 @@ export class UserController {
   constructor(private readonly UserService:UserService) {}
 
   @Get()
-  getUsers():FindUserDto[] {
-    return this.UserService.getUsers();
+  getAll():Promise<User[]> {
+    return this.UserService.getAll();
   }
 
-  @Get('/:userId')
-  getUserById(@Param('userId') userId : string):FindUserDto {
-    return this.UserService.getUserById(userId);
+  @Get('/:id')
+  get(@Param('id') id:string) :Promise<User> {
+    return this.UserService.find(id);
   }
 
   @Post()
-  createUser(@Body() body:CreatUserDto):UserDto {
-    return this.UserService.createUser(body);
+  create(@Body() user:User):Promise<User> {
+    return this.UserService.create(user);
   }
 
-  @Put('/:userId')
-  updateUser(@Param('userId') userId: string, @Body() body:FindUserDto):UserDto {
-    return this.UserService.updateUser(body, userId);
+  @Put('/:id')
+  update(@Param('id') id: string, @Body() user:User):Promise<User> {
+    return this.UserService.update(id, user);
   }
 
-  @Delete('/:userId')
-  deleteUser(@Param('userId') userId:string):string {
-    this.UserService.deleteUserById(userId);
+  @Delete('/:id')
+  delete(@Param('id') id:string):string {
+    this.UserService.delete(id);
 
-    return `delete suscessfully user with id ${userId}`;
+    return `delete suscessfully user with id ${id}`;
   }
 }
