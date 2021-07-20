@@ -26,5 +26,9 @@
 
 **11-12-13/7**
 - Adding module file,
-- Researching about Typescript, Nestjs.
+- Researching about nestjs.
+
+**14-15-16-19-20/7**
+- Connecting app to Mongdb.
+- Editing module, controller, service of app and user. 	
 
