@@ -3,7 +3,6 @@
  - Target for month July 2021  is understanding basic nestjs from introduction to overview/modules
 - Demand : Must do really carefully, understanding about decorator, github project, creating daily memo, README, notice about naming ,
 - Daily memo, README write for myself can easily understand if  read again in future.
-Update: Vừa đọc document, vừa code theo, vừa custom 
 
 ## **Daily memo**
 
@@ -33,3 +32,6 @@ Update: Vừa đọc document, vừa code theo, vừa custom
 - Connecting app to Mongdb.
 - Editing module, controller, service of app and user. 	
 
+**21-22/7**
+- Summary Nest's document  : First steps and Controllers.
+- Follow code of docs, recode and customize .
