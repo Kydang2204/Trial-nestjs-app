@@ -7,3 +7,5 @@ export const UserSchema = new mongoose.Schema({
 }, {
   versionKey: false,
 });
+
+mongoose.set('useFindAndModify', false);

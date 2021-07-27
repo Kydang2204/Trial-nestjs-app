@@ -4,7 +4,11 @@ import {
 
 import {
   User,
-} from './dtos/user.dto';
+} from '../dtos/user.dto';
+
+import {
+  Message,
+} from '../dtos/message.dto';
 
 import {
   UserService,
@@ -35,9 +39,13 @@ export class UserController {
   }
 
   @Delete('/:id')
-  delete(@Param('id') id:string):string {
+  delete(@Param('id') id:string):Message {
     this.UserService.delete(id);
 
-    return `delete suscessfully user with id ${id}`;
+    const resq = {
+      code: 1001, msg: 'Delete successfull',
+    };
+
+    return resq;
   }
 }

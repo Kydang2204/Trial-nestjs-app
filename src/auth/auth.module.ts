@@ -7,12 +7,12 @@ import {
 } from '@nestjs/mongoose';
 
 import {
-  UserController,
-} from './user.controller';
+  AuthController,
+} from './auth.controller';
 
 import {
-  UserService,
-} from './user.service';
+  AuthService,
+} from './auth.service';
 
 import {
   UserSchema,
@@ -22,7 +22,7 @@ import {
   imports: [MongooseModule.forFeature([{
     name: 'User', schema: UserSchema,
   }])],
-  controllers: [UserController],
-  providers: [UserService],
+  controllers: [AuthController],
+  providers: [AuthService],
 })
-export class UserModule {}
+export class AuthModule {}
