@@ -9,3 +9,4 @@ export const UserSchema = new mongoose.Schema({
 });
 
 mongoose.set('useFindAndModify', false);
+
