@@ -35,3 +35,8 @@
 **21-22/7**
 - Summary Nest's document  : First steps and Controllers.
 - Follow code of docs, recode and customize .
+
+**23-26-27/7**
+- Summary Nest's document  : Providers and Modules.
+- Adding login api with bcrypt
+
