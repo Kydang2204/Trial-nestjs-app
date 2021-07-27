@@ -12,7 +12,7 @@ import {
 
 import {
   User,
-} from './dtos/user.dto';
+} from '../dtos/user.dto';
 
 @Injectable()
 export class UserService {
