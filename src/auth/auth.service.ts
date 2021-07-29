@@ -10,8 +10,6 @@ import {
   InjectModel,
 } from '@nestjs/mongoose';
 
-import * as bcrypt from 'bcrypt';
-
 import {
   User,
 } from '../dtos/user.dto';
@@ -26,9 +24,6 @@ export class AuthService {
 
   async register(user:User):Promise<User> {
     const NewUser = new this.UserModel(user);
-
-    NewUser.password = await bcrypt.hash(NewUser.password, 10);
-
     return NewUser.save();
   }
 
@@ -46,7 +41,7 @@ export class AuthService {
       return resp;
     }
 
-    const isMatch = await bcrypt.compare(user.password, account.password);
+    const isMatch = await account.verifyPassword(user.password);
 
     if (isMatch) {
       resp = {

@@ -1,4 +1,5 @@
 import {
+  Global,
   Module,
 } from '@nestjs/common';
 
@@ -18,6 +19,7 @@ import {
   UserSchema,
 } from '../schemas/schema.user';
 
+@Global()
 @Module({
   imports: [MongooseModule.forFeature([{
     name: 'User', schema: UserSchema,

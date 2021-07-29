@@ -1,5 +1,7 @@
 import * as mongoose from 'mongoose';
 
+import * as bcrypt from 'mongoose-bcrypt';
+
 export const UserSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -9,3 +11,5 @@ export const UserSchema = new mongoose.Schema({
 });
 
 mongoose.set('useFindAndModify', false);
+
+UserSchema.plugin(bcrypt);
