@@ -1,9 +1,9 @@
 ## **Notes for meeting**
 
- - Target for month July 2021  is understanding basic nestjs from introduction to overview/modules
+- Target for month July 2021  is understanding basic nestjs from introduction to overview/modules
 - Demand : Must do really carefully, understanding about decorator, github project, creating daily memo, README, notice about naming ,
 - Daily memo, README write for myself can easily understand if  read again in future.
-
+- Target for month August, Septemper : Exception filters,  Pipes , Middleware, Guards
 ## **Daily memo**
 
 **5/7**
@@ -40,3 +40,6 @@
 - Summary Nest's document  : Providers and Modules.
 - Adding login api with bcrypt
 
+**28-29-30/7 & 2-3/8
+- Adding login api with mongoose-bcrypt.
+- Summary results from June and July and present target for Aug and Sep 
