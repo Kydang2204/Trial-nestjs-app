@@ -3,7 +3,7 @@ import {
 } from '@nestjs/common';
 
 import {
-  User,
+  UserDto,
 } from '../dtos/user.dto';
 
 import {
@@ -19,12 +19,12 @@ export class AuthController {
   constructor(private readonly AuthService:AuthService) {}
 
   @Post('register')
-  register(@Body() user: User):Promise<User> {
+  register(@Body() user: UserDto):Promise<UserDto> {
     return this.AuthService.register(user);
   }
 
   @Post('login')
-  login(@Body() user:User):Promise<Message> {
+  login(@Body() user:UserDto):Promise<Message> {
     return this.AuthService.login(user);
   }
 }

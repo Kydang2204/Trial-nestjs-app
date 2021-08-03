@@ -3,7 +3,7 @@ import {
 } from '@nestjs/common';
 
 import {
-  User,
+  UserDto,
 } from '../dtos/user.dto';
 
 import {
@@ -19,22 +19,22 @@ export class UserController {
   constructor(private readonly UserService:UserService) {}
 
   @Get()
-  getAll():Promise<User[]> {
+  getAll():Promise<UserDto[]> {
     return this.UserService.getAll();
   }
 
   @Get('/:id')
-  get(@Param('id') id:string) :Promise<User> {
+  get(@Param('id') id:string) :Promise<UserDto> {
     return this.UserService.find(id);
   }
 
   @Post()
-  create(@Body() user:User):Promise<User> {
+  create(@Body() user:UserDto):Promise<UserDto> {
     return this.UserService.create(user);
   }
 
   @Put('/:id')
-  update(@Param('id') id: string, @Body() user:User):Promise<User> {
+  update(@Param('id') id: string, @Body() user:UserDto):Promise<UserDto> {
     return this.UserService.update(id, user);
   }
 

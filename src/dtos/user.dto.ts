@@ -1,5 +1,5 @@
 
-export class User {
+export class UserDto {
   id? :string;
 
   name:string;
