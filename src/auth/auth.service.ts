@@ -10,11 +10,13 @@ import {
   InjectModel,
 } from '@nestjs/mongoose';
 
-import * as bcrypt from 'bcrypt';
+import {
+  UserDto,
+} from '../dtos/user.dto';
 
 import {
   User,
-} from '../dtos/user.dto';
+} from '../schemas/schema.user';
 
 import {
   Message,
@@ -24,15 +26,13 @@ import {
 export class AuthService {
   constructor(@InjectModel('User') private readonly UserModel: Model<User>) {}
 
-  async register(user:User):Promise<User> {
+  async register(user:UserDto):Promise<UserDto> {
     const NewUser = new this.UserModel(user);
-
-    NewUser.password = await bcrypt.hash(NewUser.password, 10);
 
     return NewUser.save();
   }
 
-  async login(user:User): Promise<Message> {
+  async login(user:UserDto): Promise<Message> {
     const account = await this.UserModel.findOne({
       email: user.email,
     });
@@ -46,7 +46,7 @@ export class AuthService {
       return resp;
     }
 
-    const isMatch = await bcrypt.compare(user.password, account.password);
+    const isMatch = await account.verifyPassword(user.password);
 
     if (isMatch) {
       resp = {
