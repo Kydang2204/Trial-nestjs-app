@@ -10,6 +10,8 @@ import {
   InjectModel,
 } from '@nestjs/mongoose';
 
+import * as jsonwebtoken from 'jsonwebtoken';
+
 import {
   UserDto,
 } from '../dtos/user.dto';
@@ -26,6 +28,13 @@ import {
 export class AuthService {
   constructor(@InjectModel('User') private readonly UserModel: Model<User>) {}
 
+  async validateEmail(email:string):Promise<UserDto> {
+    const findUser = await this.UserModel.findOne({
+      email,
+    });
+    return findUser;
+  }
+
   async register(user:UserDto):Promise<UserDto> {
     const NewUser = new this.UserModel(user);
 
@@ -36,7 +45,7 @@ export class AuthService {
     const account = await this.UserModel.findOne({
       email: user.email,
     });
-    let resp:Message;
+    let resp = new Message();
 
     if (!account) {
       resp = {
@@ -49,9 +58,16 @@ export class AuthService {
     const isMatch = await account.verifyPassword(user.password);
 
     if (isMatch) {
-      resp = {
-        code: 1000, msg: 'Login succesfully',
-      };
+      resp.code = 1000;
+
+      resp.msg = jsonwebtoken.sign(
+        {
+          id: account.id,
+        }, '1234',
+        {
+          expiresIn: 6000,
+        },
+      );
 
       return resp;
     }

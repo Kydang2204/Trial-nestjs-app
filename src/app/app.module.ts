@@ -1,5 +1,5 @@
 import {
-  Module,
+  Module, NestModule, MiddlewareConsumer,
 } from '@nestjs/common';
 
 import {

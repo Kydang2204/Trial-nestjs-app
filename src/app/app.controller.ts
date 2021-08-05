@@ -1,4 +1,5 @@
 import {
+  UseFilters,
   Controller, Get,
 } from '@nestjs/common';
 
@@ -11,7 +12,7 @@ export class AppController {
   constructor(private readonly AppService:AppService) {}
 
   @Get()
-  getHello():string {
+  hello():string {
     return this.AppService.getHello();
   }
 }

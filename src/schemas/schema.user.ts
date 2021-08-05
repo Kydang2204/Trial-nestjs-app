@@ -19,7 +19,7 @@ export class User extends Document {
   @Prop()
   password:string;
 
-  verifyPassword: (Password:string) => boolean;
+  verifyPassword: (password:string) => boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
