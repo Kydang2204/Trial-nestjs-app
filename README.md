@@ -40,6 +40,9 @@
 - Summary Nest's document  : Providers and Modules.
 - Adding login api with bcrypt
 
-**28-29-30/7 & 2-3/8
+**28-29-30/7 & 2-3/8**
 - Adding login api with mongoose-bcrypt.
-- Summary results from June and July and present target for Aug and Sep 
+- Summary results from June and July and present target for Aug and Sep
+
+**4-5/8**
+- Adding middleware to check email before register.
