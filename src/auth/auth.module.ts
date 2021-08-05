@@ -19,8 +19,8 @@ import {
 } from '../schemas/schema.user';
 
 import {
-  ValidateEmailMiddleware,
-} from '../common/middleware/validate-email.middleware';
+  CheckEmailDuplicateMiddleware,
+} from '../common/middleware/check-email-duplicate.middleware';
 
 @Module({
   imports: [MongooseModule.forFeature([{
@@ -33,7 +33,7 @@ import {
 export class AuthModule implements NestModule {
   configure(consumer: MiddlewareConsumer):void {
     consumer
-      .apply(ValidateEmailMiddleware)
+      .apply(CheckEmailDuplicateMiddleware)
       .forRoutes('auth/register');
   }
 }

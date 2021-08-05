@@ -11,6 +11,10 @@ import {
 } from 'src/auth/auth.service';
 
 import {
+  VerifyToken,
+} from 'src/common/middleware/verify-token.middleware';
+
+import {
   UserController,
 } from './user.controller';
 
@@ -23,8 +27,8 @@ import {
 } from '../schemas/schema.user';
 
 import {
-  ValidateEmailMiddleware,
-} from '../common/middleware/validate-email.middleware';
+  CheckEmailDuplicateMiddleware,
+} from '../common/middleware/check-email-duplicate.middleware';
 
 @Module({
   imports: [MongooseModule.forFeature([{
@@ -36,7 +40,9 @@ import {
 export class UserModule implements NestModule {
   configure(consumer: MiddlewareConsumer):void {
     consumer
-      .apply(ValidateEmailMiddleware)
+      .apply(VerifyToken)
+      .forRoutes(UserController)
+      .apply(VerifyToken, CheckEmailDuplicateMiddleware)
       .forRoutes({
         path: 'users', method: RequestMethod.POST,
       });

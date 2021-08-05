@@ -24,12 +24,16 @@ import {
   Message,
 } from '../dtos/message.dto';
 
+import {
+  jwtConstant,
+} from '../constants';
+
 @Injectable()
 export class AuthService {
   constructor(@InjectModel('User') private readonly UserModel: Model<User>) {}
 
-  async validateEmail(email:string):Promise<UserDto> {
-    const findUser = await this.UserModel.findOne({
+  async checkEmailDuplicate(email:string):Promise<UserDto> {
+    const findUser : null | UserDto = await this.UserModel.findOne({
       email,
     });
     return findUser;
@@ -63,9 +67,9 @@ export class AuthService {
       resp.msg = jsonwebtoken.sign(
         {
           id: account.id,
-        }, '1234',
+        }, jwtConstant.secret,
         {
-          expiresIn: 6000,
+          expiresIn: 60,
         },
       );
 

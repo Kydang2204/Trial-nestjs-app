@@ -15,12 +15,12 @@ import {
 } from '../exception/email-existed.exception';
 
 @Injectable()
-export class ValidateEmailMiddleware implements NestMiddleware {
+export class CheckEmailDuplicateMiddleware implements NestMiddleware {
   constructor(private readonly AuthService:AuthService) {}
 
   use(req: Request, res: Response, next: NextFunction):Promise<void> {
     return (async () => {
-      const result = await this.AuthService.validateEmail(req.body.email);
+      const result = await this.AuthService.checkEmailDuplicate(req.body.email);
       if (result) throw new EmailExistedException();
 
       next();
