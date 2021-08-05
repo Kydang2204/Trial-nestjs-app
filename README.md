@@ -46,3 +46,4 @@
 
 **4-5/8**
 - Adding middleware to check email before register.
+- Adding middleware to verify token.
