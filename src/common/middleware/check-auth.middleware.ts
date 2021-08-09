@@ -6,10 +6,6 @@ import {
   Request, Response, NextFunction,
 } from 'express';
 
-import {
-  AuthService,
-} from 'src/auth/auth.service';
-
 import * as jwt from 'jsonwebtoken';
 
 import {
@@ -21,9 +17,7 @@ import {
 } from '../../constants';
 
 @Injectable()
-export class VerifyToken implements NestMiddleware {
-  constructor(private readonly AuthService:AuthService) {}
-
+export class CheckAuthMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction):void {
     try {
       const result = jwt.verify(req.header('auth_token'), jwtConstant.secret);

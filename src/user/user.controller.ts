@@ -1,10 +1,14 @@
 import {
-  Controller, Get, Post, Put, Delete, Param, Body,
+  Controller, Get, Post, Put, Delete, Param, Body, UseFilters,
 } from '@nestjs/common';
 
 import {
   UserDto,
 } from '../dtos/user.dto';
+
+import {
+  AllExceptionsFilter,
+} from '../common/exception/validation-error.filter';
 
 import {
   Message,
@@ -29,6 +33,7 @@ export class UserController {
   }
 
   @Post()
+  @UseFilters(new AllExceptionsFilter())
   create(@Body() user:UserDto):Promise<UserDto> {
     return this.UserService.create(user);
   }
@@ -43,7 +48,8 @@ export class UserController {
     this.UserService.delete(id);
 
     const resq = {
-      code: 1001, msg: 'Delete successfull',
+      ret_code:0,ret_msg:'ok',
+      ext_code: 1001, ext_info: 'Delete successfully',
     };
 
     return resq;

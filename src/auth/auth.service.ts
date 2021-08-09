@@ -1,5 +1,5 @@
 import {
-  Injectable,
+  Injectable, UseFilters,
 } from '@nestjs/common';
 
 import {
@@ -41,7 +41,6 @@ export class AuthService {
 
   async register(user:UserDto):Promise<UserDto> {
     const NewUser = new this.UserModel(user);
-
     return NewUser.save();
   }
 
@@ -53,7 +52,8 @@ export class AuthService {
 
     if (!account) {
       resp = {
-        code: 2000, msg: 'Email has not register',
+        ret_code:-1,ret_msg:'Fail',
+        ext_code: 2000, ext_info: 'Email has not register',
       };
 
       return resp;
@@ -62,24 +62,17 @@ export class AuthService {
     const isMatch = await account.verifyPassword(user.password);
 
     if (isMatch) {
-      resp.code = 1000;
-
-      resp.msg = jsonwebtoken.sign(
-        {
-          id: account.id,
-        }, jwtConstant.secret,
-        {
-          expiresIn: 60,
-        },
-      );
-
+      resp = {
+      ret_code:0, ret_msg:'Ok',
+      ext_code: 1000, 
+      ext_info: jsonwebtoken.sign({ id: account.id}, jwtConstant.secret,{expiresIn: 60 * 60 * 24,})
+      }
       return resp;
     }
 
     resp = {
-      code: 2001, msg: 'Wrong password',
-    };
-
+      ret_code:-1,ret_msg:'Fail',
+      ext_code: 2000, ext_info: 'Wrong password',
+    }
     return resp;
-  }
-}
+  }}

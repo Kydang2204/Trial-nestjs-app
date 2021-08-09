@@ -1,5 +1,5 @@
 import {
-  Module, MiddlewareConsumer, NestModule,
+  Module,
 } from '@nestjs/common';
 
 import {
@@ -18,10 +18,6 @@ import {
   UserSchema,
 } from '../schemas/schema.user';
 
-import {
-  CheckEmailDuplicateMiddleware,
-} from '../common/middleware/check-email-duplicate.middleware';
-
 @Module({
   imports: [MongooseModule.forFeature([{
     name: 'User', schema: UserSchema,
@@ -30,10 +26,4 @@ import {
   providers: [AuthService],
   exports: [AuthService],
 })
-export class AuthModule implements NestModule {
-  configure(consumer: MiddlewareConsumer):void {
-    consumer
-      .apply(CheckEmailDuplicateMiddleware)
-      .forRoutes('auth/register');
-  }
-}
+export class AuthModule {}

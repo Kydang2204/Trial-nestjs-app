@@ -1,5 +1,5 @@
 import {
-  Controller, Post, Body,
+  Controller, Post, Body, UseFilters, BadRequestException,
 } from '@nestjs/common';
 
 import {
@@ -14,11 +14,16 @@ import {
   AuthService,
 } from './auth.service';
 
+import {
+  AllExceptionsFilter,
+} from '../common/exception/validation-error.filter';
+
 @Controller('auth')
 export class AuthController {
   constructor(private readonly AuthService:AuthService) {}
 
   @Post('register')
+  @UseFilters(new AllExceptionsFilter())
   register(@Body() user: UserDto):Promise<UserDto> {
     return this.AuthService.register(user);
   }
