@@ -10,13 +10,19 @@ import * as bcrypt from 'mongoose-bcrypt';
 
 @Schema()
 export class User extends Document {
-  @Prop()
+  @Prop({
+    required: true, unique: true,
+  })
   email:string;
 
-  @Prop()
+  @Prop({
+    required: true,
+  })
   name:string;
 
-  @Prop()
+  @Prop({
+    required: true,
+  })
   password:string;
 
   verifyPassword: (password:string) => boolean;
@@ -25,3 +31,4 @@ export class User extends Document {
 export const UserSchema = SchemaFactory.createForClass(User);
 
 UserSchema.plugin(bcrypt);
+

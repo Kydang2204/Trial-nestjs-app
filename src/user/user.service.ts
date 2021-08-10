@@ -11,12 +11,20 @@ import {
 } from '@nestjs/mongoose';
 
 import {
+  Response,
+} from 'express';
+
+import {
   UserDto,
 } from '../dtos/user.dto';
 
+import {
+  User,
+} from '../schemas/schema.user';
+
 @Injectable()
 export class UserService {
-  constructor(@InjectModel('User') private readonly UserModel: Model<UserDto>) {}
+  constructor(@InjectModel('User') private readonly UserModel: Model<User>) {}
 
   async getAll():Promise<UserDto[]> {
     return this.UserModel.find({});
@@ -28,9 +36,8 @@ export class UserService {
     });
   }
 
-  async create(user:UserDto):Promise<UserDto> {
+  async create(user:UserDto, res?:Response):Promise<UserDto> {
     const NewUser = new this.UserModel(user);
-
     return NewUser.save();
   }
 

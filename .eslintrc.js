@@ -17,7 +17,9 @@ module.exports = {
       '@typescript-eslint',
     ],
     rules: {
-      //"@typescript-eslint/ban-types": "off",
+      "@typescript-eslint/explicit-module-boundary-types":'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
+      "no-param-reassign":["error", { "props": false }],
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-shadow": "off",
       'import/prefer-default-export':'off',

@@ -1,5 +1,5 @@
 import {
-  Module,
+  Module, MiddlewareConsumer, NestModule, RequestMethod,
 } from '@nestjs/common';
 
 import {
@@ -23,7 +23,9 @@ import {
 } from './app.service';
 
 @Module({
-  imports: [UserModule, AuthModule, MongooseModule.forRoot('mongodb://127.0.0.1:27017/database')],
+  imports: [UserModule, AuthModule, MongooseModule.forRoot('mongodb://127.0.0.1:27017/database', {
+    useFindAndModify: false, useCreateIndex: true,
+  })],
   controllers: [AppController],
   providers: [AppService],
 })

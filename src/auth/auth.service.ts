@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
 } from '@nestjs/common';
 
@@ -21,10 +22,6 @@ import {
 } from '../schemas/schema.user';
 
 import {
-  Message,
-} from '../dtos/message.dto';
-
-import {
   jwtConstant,
 } from '../constants';
 
@@ -32,54 +29,31 @@ import {
 export class AuthService {
   constructor(@InjectModel('User') private readonly UserModel: Model<User>) {}
 
-  async checkEmailDuplicate(email:string):Promise<UserDto> {
-    const findUser : null | UserDto = await this.UserModel.findOne({
-      email,
-    });
-    return findUser;
-  }
-
   async register(user:UserDto):Promise<UserDto> {
     const NewUser = new this.UserModel(user);
-
     return NewUser.save();
   }
 
-  async login(user:UserDto): Promise<Message> {
+  async login(user:UserDto): Promise<string> {
     const account = await this.UserModel.findOne({
       email: user.email,
     });
-    let resp = new Message();
 
     if (!account) {
-      resp = {
-        code: 2000, msg: 'Email has not register',
-      };
-
-      return resp;
+      throw new BadRequestException();
     }
 
     const isMatch = await account.verifyPassword(user.password);
 
     if (isMatch) {
-      resp.code = 1000;
-
-      resp.msg = jsonwebtoken.sign(
-        {
-          id: account.id,
-        }, jwtConstant.secret,
-        {
-          expiresIn: 60,
-        },
-      );
-
-      return resp;
+      return jsonwebtoken.sign({
+        id: account.id,
+      }, jwtConstant.secret, {
+        expiresIn: 60 * 60 * 24,
+      });
     }
 
-    resp = {
-      code: 2001, msg: 'Wrong password',
-    };
-
-    return resp;
+    throw new BadRequestException();
   }
 }
+
