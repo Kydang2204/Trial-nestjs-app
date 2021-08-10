@@ -1,24 +1,33 @@
 import {
   Prop, Schema, SchemaFactory,
 } from '@nestjs/mongoose';
+
 import {
-  Document
+  Document,
 } from 'mongoose';
+
 import * as bcrypt from 'mongoose-bcrypt';
 
 @Schema()
 export class User extends Document {
-  @Prop({ required: true,unique:true})
+  @Prop({
+    required: true, unique: true,
+  })
   email:string;
 
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+  })
   name:string;
 
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+  })
   password:string;
 
   verifyPassword: (password:string) => boolean;
 }
+
 export const UserSchema = SchemaFactory.createForClass(User);
 
 UserSchema.plugin(bcrypt);

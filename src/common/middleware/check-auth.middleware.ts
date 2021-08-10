@@ -1,5 +1,5 @@
 import {
-  Injectable, NestMiddleware,
+  Injectable, NestMiddleware, HttpException, HttpStatus,
 } from '@nestjs/common';
 
 import {
@@ -9,8 +9,8 @@ import {
 import * as jwt from 'jsonwebtoken';
 
 import {
-  CheckAuthException,
-} from '../exception/check-auth.exception';
+  Message,
+} from 'src/dtos/Message.dto';
 
 import {
   jwtConstant,
@@ -24,7 +24,13 @@ export class CheckAuthMiddleware implements NestMiddleware {
 
       next();
     } catch {
-      throw new CheckAuthException();
+      const result = new Message();
+
+      result.ext_code = 2004;
+
+      result.ext_msg = 'You have to login first';
+
+      res.json(result);
     }
   }
 }

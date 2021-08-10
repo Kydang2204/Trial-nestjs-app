@@ -1,7 +1,10 @@
 
 export class Message {
-  ret_code:number;
-  ret_msg:string;
-  ext_code:number;
-  ext_info:string;
+  ret_code = -1;
+
+  ret_msg = 'Fail';
+
+  ext_code : number;
+
+  ext_msg : string;
 }

@@ -9,9 +9,10 @@ import {
 import {
   MongoError,
 } from 'mongodb';
+
 import {
-  Message
-} from '../../dtos/message.dto'
+  Message,
+} from '../../dtos/Message.dto';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -22,22 +23,24 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const status = exception instanceof HttpException
       ? exception.getStatus()
       : HttpStatus.INTERNAL_SERVER_ERROR;
-    let resp =new Message;
+
+    const resp = new Message();
 
     switch (exception.code) {
       case 11000:
-        resp = {
-          ret_code:-1,ret_msg:'Fail',
-          ext_code: 2002, ext_info: 'Duplicate Email'
-        }
+
+        resp.ext_code = 2000;
+
+        resp.ext_msg = 'Duplicate Email';
+
         response.status(status).json(resp);
 
         break;
       default:
-        resp = {
-          ret_code:-1,ret_msg:'Fail',
-          ext_code: 2002, ext_info: 'An unknown error'
-        }
+        resp.ext_code = 2000;
+
+        resp.ext_msg = 'An unknown error';
+
         response.status(status).json(resp);
     }
   }

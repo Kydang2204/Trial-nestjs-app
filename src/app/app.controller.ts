@@ -1,5 +1,4 @@
 import {
-  UseFilters,
   Controller, Get,
 } from '@nestjs/common';
 
