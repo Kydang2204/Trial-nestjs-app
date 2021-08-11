@@ -11,10 +11,6 @@ import {
 } from '@nestjs/mongoose';
 
 import {
-  Response,
-} from 'express';
-
-import {
   UserDto,
 } from '../dtos/user.dto';
 
@@ -30,13 +26,13 @@ export class UserService {
     return this.UserModel.find({});
   }
 
-  async find(id: string):Promise<UserDto> {
+  async find(id: string):Promise<UserDto | null> {
     return this.UserModel.findOne({
       _id: id,
     });
   }
 
-  async create(user:UserDto, res?:Response):Promise<UserDto> {
+  async create(user:UserDto):Promise<UserDto> {
     const NewUser = new this.UserModel(user);
     return NewUser.save();
   }
