@@ -52,3 +52,8 @@
 **6-9-10/8**
 - Handling duplicate email when add user by set unique in schema and catch error by exception filter.
 - Modify output by use decorator.
+
+**11/8**
+- Validate pramas Id by CheckIdMiddleware.
+- Validate request.body of method post by class-validator and ValidationPipe.
+- Catch error by ValidateUserFilter, AllExceptionsFilter,CheckAuthFilter
