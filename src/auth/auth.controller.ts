@@ -15,7 +15,7 @@ import {
 } from '../common/decorator/result.decorator';
 
 import {
-  HttpExceptionFilter,
+  CheckAuthFilter,
 } from '../common/exception/check-auth.filter';
 
 import {
@@ -36,7 +36,7 @@ export class AuthController {
   }
 
   @Post('login')
-  @UseFilters(new HttpExceptionFilter())
+  @UseFilters(new CheckAuthFilter())
   async login(@Body() user:UserDto, @ResultDecorator() result):Promise<UserDto> {
     result.data = await this.AuthService.login(user);
 
