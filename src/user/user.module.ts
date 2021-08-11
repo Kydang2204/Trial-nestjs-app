@@ -1,5 +1,5 @@
 import {
-  Module, NestModule, MiddlewareConsumer,
+  Module, NestModule, MiddlewareConsumer, RequestMethod,
 } from '@nestjs/common';
 
 import {
@@ -13,6 +13,10 @@ import {
 import {
   CheckAuthMiddleware,
 } from 'src/common/middleware/check-auth.middleware';
+
+import {
+  CheckIdMiddleware,
+} from 'src/common/middleware/check-id.middleware';
 
 import {
   UserController,
@@ -37,6 +41,16 @@ export class UserModule implements NestModule {
   configure(consumer: MiddlewareConsumer):void {
     consumer
       .apply(CheckAuthMiddleware)
+      .forRoutes(UserController)
+      .apply(CheckIdMiddleware)
+      .exclude(
+        {
+          path: 'users', method: RequestMethod.GET,
+        },
+        {
+          path: 'users', method: RequestMethod.POST,
+        },
+      )
       .forRoutes(UserController);
   }
 }
