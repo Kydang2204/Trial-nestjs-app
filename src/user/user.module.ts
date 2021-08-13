@@ -1,5 +1,5 @@
 import {
-  Module, NestModule, MiddlewareConsumer, RequestMethod,
+  Module,
 } from '@nestjs/common';
 
 import {
@@ -7,50 +7,23 @@ import {
 } from '@nestjs/mongoose';
 
 import {
-  AuthService,
-} from 'src/auth/auth.service';
-
-import {
-  CheckAuthMiddleware,
-} from 'src/common/middleware/check-auth.middleware';
-
-import {
-  CheckIdMiddleware,
-} from 'src/common/middleware/check-id.middleware';
-
-import {
   UserController,
 } from './user.controller';
 
 import {
-  UserService,
+  _UserService,
 } from './user.service';
 
 import {
   UserSchema,
-} from '../schemas/schema.user';
+} from '../schema/schema.user';
 
 @Module({
   imports: [MongooseModule.forFeature([{
     name: 'User', schema: UserSchema,
   }])],
   controllers: [UserController],
-  providers: [UserService, AuthService],
+  providers: [_UserService],
+  exports: [_UserService],
 })
-export class UserModule implements NestModule {
-  configure(consumer: MiddlewareConsumer):void {
-    consumer
-      .apply(CheckAuthMiddleware)
-      .forRoutes(UserController)
-      .apply(CheckIdMiddleware)
-      .exclude(
-        {
-          path: 'users', method: RequestMethod.GET,
-        },
-        {
-          path: 'users', method: RequestMethod.POST,
-        },
-      )
-      .forRoutes(UserController);
-  }
-}
+export class UserModule {}

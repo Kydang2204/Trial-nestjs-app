@@ -11,19 +11,19 @@ import {
 } from './auth.controller';
 
 import {
-  AuthService,
+  _AuthService,
 } from './auth.service';
 
 import {
   UserSchema,
-} from '../schemas/schema.user';
+} from '../schema/schema.user';
 
 @Module({
   imports: [MongooseModule.forFeature([{
     name: 'User', schema: UserSchema,
   }])],
   controllers: [AuthController],
-  providers: [AuthService],
-  exports: [AuthService],
+  providers: [_AuthService],
+  exports: [_AuthService],
 })
 export class AuthModule {}

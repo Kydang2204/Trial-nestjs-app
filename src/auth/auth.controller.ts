@@ -1,46 +1,31 @@
 import {
-  Controller, Post, Body, UseFilters, UsePipes, ValidationPipe,
+  Controller, Post, Body,
 } from '@nestjs/common';
 
 import {
   UserDto,
-} from '../dtos/user.dto';
+} from '../dto/user.dto';
 
 import {
-  AuthService,
+  LoginUserDto,
+} from '../dto/login-user.dto';
+
+import {
+  _AuthService,
 } from './auth.service';
-
-import {
-  ResultDecorator,
-} from '../common/decorator/result.decorator';
-
-import {
-  CheckAuthFilter,
-} from '../common/exception/check-auth.filter';
-
-import {
-  ValidateUserFilter,
-} from '../common/exception/validate-user.filter';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly AuthService:AuthService) {}
+  constructor(private readonly AuthService:_AuthService) {}
 
   @Post('register')
-  @UsePipes(new ValidationPipe())
-  @UseFilters(new ValidateUserFilter())
-  async register(@Body() user: UserDto, @ResultDecorator() result):Promise<UserDto> {
-    result.data = await this.AuthService.register(user);
-
-    return result;
+  register(@Body() user: UserDto):Promise<UserDto> {
+    return this.AuthService.register(user);
   }
 
   @Post('login')
-  @UseFilters(new CheckAuthFilter())
-  async login(@Body() user:UserDto, @ResultDecorator() result):Promise<UserDto> {
-    result.data = await this.AuthService.login(user);
-
-    return result;
+  login(@Body() user:LoginUserDto):Promise<string> {
+    return this.AuthService.login(user);
   }
 }
 

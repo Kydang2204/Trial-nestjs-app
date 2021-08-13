@@ -1,6 +1,7 @@
 import {
-  BadRequestException,
   Injectable,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 
 import {
@@ -15,22 +16,23 @@ import * as jsonwebtoken from 'jsonwebtoken';
 
 import {
   UserDto,
-} from '../dtos/user.dto';
+} from '../dto/user.dto';
 
 import {
   User,
-} from '../schemas/schema.user';
+} from '../schema/schema.user';
 
 import {
   jwtConstant,
 } from '../constants';
 
 @Injectable()
-export class AuthService {
+export class _AuthService {
   constructor(@InjectModel('User') private readonly UserModel: Model<User>) {}
 
   async register(user:UserDto):Promise<UserDto> {
     const NewUser = new this.UserModel(user);
+
     return NewUser.save();
   }
 
@@ -40,7 +42,7 @@ export class AuthService {
     });
 
     if (!account) {
-      throw new BadRequestException();
+      throw new HttpException('Email has not registered', HttpStatus.FORBIDDEN);
     }
 
     const isMatch = await account.verifyPassword(user.password);
@@ -53,7 +55,7 @@ export class AuthService {
       });
     }
 
-    throw new BadRequestException();
+    throw new HttpException('Wrong password', HttpStatus.FORBIDDEN);
   }
 }
 

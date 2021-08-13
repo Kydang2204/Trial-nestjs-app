@@ -17,13 +17,18 @@ module.exports = {
       '@typescript-eslint',
     ],
     rules: {
-      "@typescript-eslint/explicit-module-boundary-types":'off',
-      '@typescript-eslint/no-unused-expressions': 'off',
-      "no-param-reassign":["error", { "props": false }],
-      "@typescript-eslint/no-unused-vars": "off",
-      "@typescript-eslint/no-shadow": "off",
+      'no-return-assign':'off',
+      'no-param-reassign': 'off',
       'import/prefer-default-export':'off',
       'class-methods-use-this':'off',
+      "@typescript-eslint/naming-convention": [
+        'error',
+        {
+          selector: 'typeLike',
+          format: ['PascalCase'],
+          leadingUnderscore: 'allow'
+        },
+      ],
       'brace-style': ['error', '1tbs', {
         allowSingleLine: false,
       }],
@@ -66,11 +71,13 @@ module.exports = {
             'block',
             'block-like',
             'expression',
+            'const',
+            'let',
           ],
           next: '*',
         },
         {
-          blankLine: 'any',
+          blankLine: 'always',
           prev: ['const', 'let', 'var'],
           next: ['const', 'let', 'var'],
         },
