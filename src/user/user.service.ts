@@ -12,14 +12,18 @@ import {
 
 import {
   UserDto,
-} from '../dtos/user.dto';
+} from '../dto/user.dto';
+
+import {
+  UpdateUserDto,
+} from '../dto/update-user.dto';
 
 import {
   User,
-} from '../schemas/schema.user';
+} from '../schema/schema.user';
 
 @Injectable()
-export class UserService {
+export class _UserService {
   constructor(@InjectModel('User') private readonly UserModel: Model<User>) {}
 
   async getAll():Promise<UserDto[]> {
@@ -34,10 +38,11 @@ export class UserService {
 
   async create(user:UserDto):Promise<UserDto> {
     const NewUser = new this.UserModel(user);
+
     return NewUser.save();
   }
 
-  async update(id:string, user:UserDto):Promise<UserDto> {
+  async update(id:string, user:UpdateUserDto):Promise<UserDto> {
     return this.UserModel.findByIdAndUpdate(id, user, {
       new: true,
     });

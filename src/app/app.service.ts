@@ -3,8 +3,8 @@ import {
 } from '@nestjs/common';
 
 @Injectable()
-export class AppService {
+export class _AppService {
   getHello():string {
-    return 'Welcome to Nestjs app';
+    return 'Welcome to my nestjs app';
   }
 }

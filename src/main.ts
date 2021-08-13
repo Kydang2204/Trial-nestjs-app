@@ -3,17 +3,23 @@ import {
 } from '@nestjs/core';
 
 import {
+  ValidationPipe,
+} from '@nestjs/common';
+
+import {
   AppModule,
 } from 'src/app/app.module';
 
 import {
-  AllExceptionsFilter,
-} from './common/exception/validate-all.filter';
+  ErrorFilter,
+} from './common/exception/error.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.useGlobalFilters(new AllExceptionsFilter());
+  app.useGlobalFilters(new ErrorFilter());
+
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(5000);
 }

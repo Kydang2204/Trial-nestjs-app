@@ -1,62 +1,52 @@
 import {
-  Controller, Get, Post, Put, Delete, Param, Body, UseFilters,UsePipes,ValidationPipe
+  Controller, Get, Post, Put, Delete, Param, Body, UseInterceptors,
 } from '@nestjs/common';
 
 import {
-  ResultDecorator,
-} from 'src/common/decorator/result.decorator';
+  UserDto,
+} from '../dto/user.dto';
 
 import {
-  UserDto
-} from '../dtos/user.dto';
+  UpdateUserDto,
+} from '../dto/update-user.dto';
 
 import {
-  ValidateUserFilter,
-} from '../common/exception/validate-user.filter';
-
-import {
-  UserService,
+  _UserService,
 } from './user.service';
+
+import {
+  CheckAuthInterceptor,
+} from '../common/interceptor/check-auth.interceptor';
+
 @Controller('users')
+@UseInterceptors(CheckAuthInterceptor)
 export class UserController {
-  constructor(private readonly UserService:UserService) {}
+  constructor(private readonly UserService:_UserService) {}
 
   @Get()
-  async getAll(@ResultDecorator() result):Promise<UserDto> {
-    result.data = await this.UserService.getAll();
-
-    return result;
+  getAll():Promise<UserDto[]> {
+    return this.UserService.getAll();
   }
 
   @Get('/:id')
-  async get(@Param('id') id:string, @ResultDecorator() result) :Promise<UserDto> {
-    result.data = await this.UserService.find(id);
-
-    return result;
+  get(@Param('id') id:string) :Promise<UserDto> {
+    return this.UserService.find(id);
   }
 
   @Post()
-  @UsePipes(new ValidationPipe())
-  @UseFilters(new ValidateUserFilter())
-  async create(@Body() user:UserDto, @ResultDecorator() result):Promise<UserDto> {
-    result.data = await this.UserService.create(user);
-
-    return result;
+  create(@Body() user:UserDto):Promise<UserDto> {
+    return this.UserService.create(user);
   }
 
   @Put('/:id')
-  async update(@Param('id') id: string, @Body() user:UserDto, @ResultDecorator() result):Promise<UserDto> {
-    result.data = await this.UserService.update(id, user);
-
-    return result;
+  update(@Param('id') id: string, @Body() user:UpdateUserDto):Promise<UserDto> {
+    return this.UserService.update(id, user);
   }
 
   @Delete('/:id')
-  async delete(@Param('id') id:string, @ResultDecorator() result):Promise<UserDto> {
-    await this.UserService.delete(id);
+  delete(@Param('id') id:string):string {
+    this.UserService.delete(id);
 
-    result.data = 'Delete user successfully';
-
-    return result;
+    return 'Delete user successfully';
   }
 }

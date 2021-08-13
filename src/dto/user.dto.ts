@@ -3,8 +3,6 @@ import {
 } from 'class-validator';
 
 export class UserDto {
-  id? :string;
-
   @Length(3, 10)
   name?:string;
 
@@ -12,5 +10,6 @@ export class UserDto {
   email:string;
 
   @IsNotEmpty()
+  @Length(4)
   password:string;
 }

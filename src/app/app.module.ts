@@ -1,5 +1,5 @@
 import {
-  Module, MiddlewareConsumer, NestModule, RequestMethod,
+  Module,
 } from '@nestjs/common';
 
 import {
@@ -11,6 +11,10 @@ import {
 } from 'src/auth/auth.module';
 
 import {
+  APP_INTERCEPTOR,
+} from '@nestjs/core';
+
+import {
   UserModule,
 } from '../user/user.module';
 
@@ -19,7 +23,11 @@ import {
 } from './app.controller';
 
 import {
-  AppService,
+  OutputInterceptor,
+} from '../common/interceptor/output.interceptor';
+
+import {
+  _AppService,
 } from './app.service';
 
 @Module({
@@ -27,6 +35,9 @@ import {
     useFindAndModify: false, useCreateIndex: true,
   })],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [_AppService, {
+    provide: APP_INTERCEPTOR,
+    useClass: OutputInterceptor,
+  }],
 })
 export class AppModule {}
