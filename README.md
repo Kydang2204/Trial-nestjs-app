@@ -57,3 +57,10 @@
 - Validate pramas Id by CheckIdMiddleware.
 - Validate request.body of method post by class-validator and ValidationPipe.
 - Catch error by ValidateUserFilter, AllExceptionsFilter,CheckAuthFilter
+
+**12-13/8**
+- Add CheckAuthInterceptor to authencation, OutputInterceptor for validating params Id and edit body before sent to client 
+- Remove all middleware, ResultDecorator, 
+- Group all error filter become ErrorFilter.
+- Create more UpdateDto, LoginDto for better validation.
+
