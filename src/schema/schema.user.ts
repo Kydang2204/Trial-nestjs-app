@@ -8,7 +8,9 @@ import {
 
 import * as bcrypt from 'mongoose-bcrypt';
 
-@Schema()
+@Schema({
+  versionKey: false,
+})
 export class User extends Document {
   @Prop({
     required: true, unique: true,

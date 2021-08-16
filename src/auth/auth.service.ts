@@ -42,7 +42,7 @@ export class _AuthService {
     });
 
     if (!account) {
-      throw new HttpException('Email has not registered', HttpStatus.FORBIDDEN);
+      throw new HttpException('2003', HttpStatus.FORBIDDEN);
     }
 
     const isMatch = await account.verifyPassword(user.password);
@@ -55,7 +55,7 @@ export class _AuthService {
       });
     }
 
-    throw new HttpException('Wrong password', HttpStatus.FORBIDDEN);
+    throw new HttpException('2004', HttpStatus.FORBIDDEN);
   }
 }
 

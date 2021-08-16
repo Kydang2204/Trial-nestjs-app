@@ -30,7 +30,7 @@ export class _UserService {
     return this.UserModel.find({});
   }
 
-  async find(id: string):Promise<UserDto | null> {
+  async find(id: string):Promise<UserDto> {
     return this.UserModel.findOne({
       _id: id,
     });

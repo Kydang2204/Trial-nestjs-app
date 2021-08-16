@@ -1,5 +1,5 @@
 import {
-  Controller, Get, Post, Put, Delete, Param, Body, UseInterceptors,
+  Controller, Get, Post, Put, Delete, Param, Body,
 } from '@nestjs/common';
 
 import {
@@ -14,12 +14,7 @@ import {
   _UserService,
 } from './user.service';
 
-import {
-  CheckAuthInterceptor,
-} from '../common/interceptor/check-auth.interceptor';
-
 @Controller('users')
-@UseInterceptors(CheckAuthInterceptor)
 export class UserController {
   constructor(private readonly UserService:_UserService) {}
 
@@ -34,19 +29,23 @@ export class UserController {
   }
 
   @Post()
-  create(@Body() user:UserDto):Promise<UserDto> {
-    return this.UserService.create(user);
+  async create(@Body() user:UserDto):Promise<number> {
+    await this.UserService.create(user);
+
+    return 1000;
   }
 
   @Put('/:id')
-  update(@Param('id') id: string, @Body() user:UpdateUserDto):Promise<UserDto> {
-    return this.UserService.update(id, user);
+  async update(@Param('id') id: string, @Body() user:UpdateUserDto):Promise<number> {
+    await this.UserService.update(id, user);
+
+    return 1001;
   }
 
   @Delete('/:id')
-  delete(@Param('id') id:string):string {
-    this.UserService.delete(id);
+  async delete(@Param('id') id:string):Promise<number> {
+    await this.UserService.delete(id);
 
-    return 'Delete user successfully';
+    return 1002;
   }
 }
