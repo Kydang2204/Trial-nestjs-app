@@ -6,6 +6,10 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 
+import {
+  CodeInfor,
+} from '../../code-info';
+
 @Catch()
 export class ErrorFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost):void {
@@ -23,16 +27,29 @@ export class ErrorFilter implements ExceptionFilter {
       response.status(status).json({
         ret_code: -1,
         ret_msg: 'fail',
-        ext_msg: 'Duplicate Email',
+        ext_code: null,
+        ext_info: 'Duplicate Email',
       });
 
       return;
     }
 
+    if (!result.response.message) {
+      response.status(status).json({
+        ret_code: -1,
+        ret_msg: 'fail',
+        ext_code: result.response,
+        ext_info: Object.keys(CodeInfor).find((key) => CodeInfor[key] === Number(result.response)),
+      });
+    }
+
+    const msg = result.response.message;
+
     response.status(status).json({
       ret_code: -1,
       ret_msg: 'fail',
-      ext_msg: result.response.message ? result.response.message[0] : result.response,
+      ext_code: null,
+      ext_info: Array.isArray(msg) ? msg[0] : msg,
     });
   }
 }
