@@ -64,3 +64,7 @@
 - Group all error filter become ErrorFilter.
 - Create more UpdateDto, LoginDto for better validation.
 
+**16/8**
+- Group CheckAuthInterceptor into OutputInterceptor
+- Modify OutputInterceptor, ErrorFilter and add file code-info.ts to optimize reponse modification in future.
+
