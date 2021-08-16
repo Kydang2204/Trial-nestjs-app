@@ -66,5 +66,5 @@
 
 **16/8**
 - Group CheckAuthInterceptor into OutputInterceptor
-- Modify OutputInterceptor, ErrorFilter and add file code-info.ts to optimize reponse modification in future.
+- Modify OutputInterceptor, ErrorFilter and add file code-info.ts to optimize response modification in future.
 
