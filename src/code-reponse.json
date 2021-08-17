@@ -1,0 +1,12 @@
+{
+    "post_success": 1000,
+    "update_success": 1001,
+    "delete_success": 1002,
+    "register_success": 1003,
+    "auth_error": 2000,
+    "id_format_error": 2001,
+    "id_not_found_error": 2002,
+    "unregistered_email_error": 2003,
+    "wrong_password_error": 2004
+}
+  

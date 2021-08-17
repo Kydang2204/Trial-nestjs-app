@@ -32,7 +32,7 @@ import {
 
 @Module({
   imports: [UserModule, AuthModule, MongooseModule.forRoot('mongodb://127.0.0.1:27017/database', {
-    useFindAndModify: false, useCreateIndex: true, versionKey: false,
+    useFindAndModify: false, useCreateIndex: true
   })],
   controllers: [AppController],
   providers: [_AppService, {

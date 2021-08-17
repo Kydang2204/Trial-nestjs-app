@@ -14,6 +14,7 @@ import {
   _AuthService,
 } from './auth.service';
 
+import * as ResponseCodes from '../code-reponse.json'
 @Controller('auth')
 export class AuthController {
   constructor(private readonly AuthService:_AuthService) {}
@@ -22,7 +23,7 @@ export class AuthController {
   async register(@Body() user: UserDto):Promise<number> {
     await this.AuthService.register(user);
 
-    return 1003;
+    return ResponseCodes.register_success;
   }
 
   @Post('login')

@@ -6,9 +6,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 
-import {
-  CodeInfor,
-} from '../../code-info';
+import * as CodeInfo from '../../code-info.json';
 
 @Catch()
 export class ErrorFilter implements ExceptionFilter {
@@ -35,17 +33,17 @@ export class ErrorFilter implements ExceptionFilter {
     }
 
     if (!result.response.message) {
-      response.status(status).json({
+      return response.status(status).json({
         ret_code: -1,
         ret_msg: 'fail',
         ext_code: result.response,
-        ext_info: Object.keys(CodeInfor).find((key) => CodeInfor[key] === Number(result.response)),
+        ext_info: Object.keys(CodeInfo).find((key) => CodeInfo[key] === Number(result.response)),
       });
     }
 
     const msg = result.response.message;
 
-    response.status(status).json({
+   return response.status(status).json({
       ret_code: -1,
       ret_msg: 'fail',
       ext_code: null,
