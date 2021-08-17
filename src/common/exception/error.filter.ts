@@ -33,17 +33,19 @@ export class ErrorFilter implements ExceptionFilter {
     }
 
     if (!result.response.message) {
-      return response.status(status).json({
+      response.status(status).json({
         ret_code: -1,
         ret_msg: 'fail',
         ext_code: result.response,
         ext_info: Object.keys(CodeInfo).find((key) => CodeInfo[key] === Number(result.response)),
       });
+
+      return;
     }
 
     const msg = result.response.message;
 
-   return response.status(status).json({
+    response.status(status).json({
       ret_code: -1,
       ret_msg: 'fail',
       ext_code: null,

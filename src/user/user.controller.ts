@@ -14,7 +14,7 @@ import {
   _UserService,
 } from './user.service';
 
-import * as ResponseCodes from '../code-reponse.json'
+import * as ResponseCodes from '../code-reponse.json';
 
 @Controller('users')
 export class UserController {

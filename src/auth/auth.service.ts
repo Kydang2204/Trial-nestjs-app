@@ -26,7 +26,7 @@ import {
   jwtConstant,
 } from '../constants';
 
-import * as ResponseCodes from '../code-reponse.json'
+import * as ResponseCodes from '../code-reponse.json';
 
 @Injectable()
 export class _AuthService {

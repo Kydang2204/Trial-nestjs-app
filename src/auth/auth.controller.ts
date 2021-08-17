@@ -14,7 +14,8 @@ import {
   _AuthService,
 } from './auth.service';
 
-import * as ResponseCodes from '../code-reponse.json'
+import * as ResponseCodes from '../code-reponse.json';
+
 @Controller('auth')
 export class AuthController {
   constructor(private readonly AuthService:_AuthService) {}

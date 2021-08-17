@@ -22,7 +22,9 @@ import {
 } from '../../constants';
 
 import * as CodeInfo from '../../code-info.json';
-import * as ResponseCodes from '../../code-reponse.json'
+
+import * as ResponseCodes from '../../code-reponse.json';
+
 @Injectable()
 export class OutputInterceptor implements NestInterceptor {
   constructor(private readonly UserService:_UserService) {}
