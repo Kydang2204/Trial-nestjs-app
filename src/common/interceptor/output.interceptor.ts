@@ -23,7 +23,7 @@ import {
 
 import * as CodeInfo from '../../code-info.json';
 
-import * as ResponseCodes from '../../code-reponse.json';
+import * as ResponseCodes from '../../code-response.json';
 
 @Injectable()
 export class OutputInterceptor implements NestInterceptor {
