@@ -21,10 +21,8 @@ import {
   jwtConstant,
 } from '../../constants';
 
-import {
-  CodeInfor,
-} from '../../code-info';
-
+import * as CodeInfo from '../../code-info.json';
+import * as ResponseCodes from '../../code-reponse.json'
 @Injectable()
 export class OutputInterceptor implements NestInterceptor {
   constructor(private readonly UserService:_UserService) {}
@@ -37,18 +35,18 @@ export class OutputInterceptor implements NestInterceptor {
       try {
         jwt.verify(req.header('auth_token'), jwtConstant.secret);
       } catch {
-        throw new HttpException('2000', HttpStatus.FORBIDDEN);
+        throw new HttpException(String(ResponseCodes.auth_error), HttpStatus.FORBIDDEN);
       }
     }
 
     if (req.params.id) {
       const result1 = await req.params.id.match(/^[0-9a-fA-F]{24}$/);
 
-      if (!result1) throw new HttpException('2001', HttpStatus.BAD_REQUEST);
+      if (!result1) throw new HttpException(String(ResponseCodes.id_format_error), HttpStatus.BAD_REQUEST);
 
       const result2 = await this.UserService.find(req.params.id);
 
-      if (!result2) throw new HttpException('2002', HttpStatus.BAD_REQUEST);
+      if (!result2) throw new HttpException(String(ResponseCodes.id_not_found_error), HttpStatus.BAD_REQUEST);
     }
 
     return next
@@ -59,7 +57,7 @@ export class OutputInterceptor implements NestInterceptor {
             ret_code: 0,
             ret_msg: 'success',
             code_msg: value,
-            msg: Object.keys(CodeInfor).find((key) => CodeInfor[key] === value),
+            msg: Object.keys(CodeInfo).find((key) => CodeInfo[key] === value),
           };
         }
 

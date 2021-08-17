@@ -5,6 +5,6 @@ import {
 @Injectable()
 export class _AppService {
   getHello():string {
-    return 'Welcome to my nestjs';
+    return 'Welcome to my nestjs app';
   }
 }

@@ -14,6 +14,8 @@ import {
   _UserService,
 } from './user.service';
 
+import * as ResponseCodes from '../code-reponse.json'
+
 @Controller('users')
 export class UserController {
   constructor(private readonly UserService:_UserService) {}
@@ -32,20 +34,20 @@ export class UserController {
   async create(@Body() user:UserDto):Promise<number> {
     await this.UserService.create(user);
 
-    return 1000;
+    return ResponseCodes.post_success;
   }
 
   @Put('/:id')
   async update(@Param('id') id: string, @Body() user:UpdateUserDto):Promise<number> {
     await this.UserService.update(id, user);
 
-    return 1001;
+    return ResponseCodes.update_success;
   }
 
   @Delete('/:id')
   async delete(@Param('id') id:string):Promise<number> {
     await this.UserService.delete(id);
 
-    return 1002;
+    return ResponseCodes.delete_success;
   }
 }

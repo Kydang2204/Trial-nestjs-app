@@ -26,6 +26,8 @@ import {
   jwtConstant,
 } from '../constants';
 
+import * as ResponseCodes from '../code-reponse.json'
+
 @Injectable()
 export class _AuthService {
   constructor(@InjectModel('User') private readonly UserModel: Model<User>) {}
@@ -42,7 +44,7 @@ export class _AuthService {
     });
 
     if (!account) {
-      throw new HttpException('2003', HttpStatus.FORBIDDEN);
+      throw new HttpException(String(ResponseCodes.unregistered_email_error), HttpStatus.FORBIDDEN);
     }
 
     const isMatch = await account.verifyPassword(user.password);
@@ -55,7 +57,7 @@ export class _AuthService {
       });
     }
 
-    throw new HttpException('2004', HttpStatus.FORBIDDEN);
+    throw new HttpException(String(ResponseCodes.wrong_password_error), HttpStatus.FORBIDDEN);
   }
 }
 
