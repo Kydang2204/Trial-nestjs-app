@@ -17,6 +17,7 @@ module.exports = {
       '@typescript-eslint',
     ],
     rules: {
+      "max-len":"off",
       'no-return-assign':'off',
       'no-param-reassign': 'off',
       'import/prefer-default-export':'off',
